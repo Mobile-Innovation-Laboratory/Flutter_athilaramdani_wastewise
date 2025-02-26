@@ -53,7 +53,6 @@ class CustomBottomNavBar extends StatelessWidget {
             ],
           ),
         ),
-        // Animated Bubble: background putih yang melayang di atas bar
         AnimatedPositioned(
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeOutBack,
@@ -112,7 +111,6 @@ class CustomBottomNavBar extends StatelessWidget {
         child: SizedBox(
           height: 70,
           child: Center(
-            // Jika item sudah aktif, ikon tidak ditampilkan (akan digantikan bubble)
             child: Icon(
               icon,
               size: 24,
