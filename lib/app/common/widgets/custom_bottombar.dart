@@ -17,6 +17,7 @@ class CustomBottomNavBar extends StatelessWidget {
     return Stack(
       clipBehavior: Clip.none,
       children: [
+        // Background Bottom Bar
         Container(
           height: 70,
           decoration: BoxDecoration(
@@ -52,50 +53,40 @@ class CustomBottomNavBar extends StatelessWidget {
             ],
           ),
         ),
+        // Animated Bubble: background putih yang melayang di atas bar
         AnimatedPositioned(
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeOutBack,
           left: (itemWidth * currentIndex) + (itemWidth / 2) - (bubbleSize / 2),
           bottom: 20,
-          child: GestureDetector(
-            onTap: () {
-              if (currentIndex == 0) {
-                Get.offAllNamed('/home');
-              } else if (currentIndex == 1) {
-                Get.offAllNamed('/wisebot');
-              } else if (currentIndex == 2) {
-                Get.offAllNamed('/account');
-              }
-            },
-            child: Container(
-              width: bubbleSize,
-              height: bubbleSize,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Center(
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  transitionBuilder: (child, animation) =>
-                      ScaleTransition(scale: animation, child: child),
-                  child: Icon(
-                    currentIndex == 0
-                        ? Icons.home
-                        : currentIndex == 1
-                        ? Icons.chat
-                        : Icons.person,
-                    key: ValueKey<int>(currentIndex),
-                    size: 32,
-                    color: AppTheme.primaryGreen,
-                  ),
+          child: Container(
+            width: bubbleSize,
+            height: bubbleSize,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Center(
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                transitionBuilder: (child, animation) =>
+                    ScaleTransition(scale: animation, child: child),
+                child: Icon(
+                  currentIndex == 0
+                      ? Icons.home
+                      : currentIndex == 1
+                      ? Icons.chat
+                      : Icons.person,
+                  key: ValueKey<int>(currentIndex),
+                  size: 32,
+                  color: AppTheme.primaryGreen,
                 ),
               ),
             ),
@@ -113,6 +104,7 @@ class CustomBottomNavBar extends StatelessWidget {
     return Expanded(
       child: GestureDetector(
         onTap: () {
+          // Hanya navigasi jika index berbeda
           if (!isSelected) {
             Get.offAllNamed(route);
           }
@@ -120,6 +112,7 @@ class CustomBottomNavBar extends StatelessWidget {
         child: SizedBox(
           height: 70,
           child: Center(
+            // Jika item sudah aktif, ikon tidak ditampilkan (akan digantikan bubble)
             child: Icon(
               icon,
               size: 24,
